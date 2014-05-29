@@ -1,0 +1,38 @@
+<div class="wrapper-box">
+
+	<!-- Heading Part -->
+	<div id="header">
+		<div class="navigation">
+			<span class="underline cur-hand pull-left" ng-click="navigate('LEFT')">Prev</span>
+		</div>
+		
+		<div class="heading">
+			<div class="week-day highlight">{{weekDay | uppercase}}</div>
+			<div class="full-date smaller-font">{{dispDate}}</div>
+		</div>
+		
+		<div class="navigation">
+			<span class="underline cur-hand pull-right" ng-click="navigate('RIGHT')">Next</span>
+		</div>
+	</div>
+	
+	<!-- Event Display and Event adder -->
+	<div id="eventBody">
+		<div>
+			<div class="event-display fadeInUp fadeOutUp" ng-repeat="evnt in weeklyEvents[dispDate]">
+				{{evnt}}
+				<div title="Delete" class="del-event" ng-click="deleteEvent($index)">&times;</div>
+			</div>
+			<div class="no-event" ng-if="!weeklyEvents[dispDate] || weeklyEvents[dispDate].length==0">
+				No Events
+			</div>
+		</div>
+		<div>
+			<input class="event-text" type="text" ng-model="eventName" placeholder="Enter an event" /><input class="add-button" ng-click="addEvent()" type="button" value="Create Event" ng-disabled="weeklyEvents[dispDate].length==5" ng-class="{'disable-btn':weeklyEvents[dispDate].length==5}" />
+		</div>
+	</div>
+	
+	<div class="dup-event" ng-if="error!=''">
+		{{error}}
+	</div>
+</div>
